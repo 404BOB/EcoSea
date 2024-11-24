@@ -40,12 +40,15 @@ print\
      
 """)
 def setup_driver():
+  try:
     options = webdriver.ChromeOptions()
     options.add_argument("--no-sandbox")
     #options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--user-data-dir=./data/")
     options.add_argument('--disable-infobars')
     return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+  except Eception:
+    pass
 def search_and_click_link(url, query):
     driver = setup_driver()
     try:
@@ -54,7 +57,10 @@ def search_and_click_link(url, query):
 
         # Click on the first link
         first_link = driver.find_element(By.XPATH, "(//h3/..)["+random.choice(['1','2','3',])+"]")
-        first_link.click()
+        try:
+          first_link.click()
+        except Exception:
+          pass
         time.sleep(5)  # Allow time for the page to load
     except KeyboardInterrupt:
       print("Recieved an interrupt! Shutting down...")
