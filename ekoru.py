@@ -58,9 +58,9 @@ def search_and_click_link(url,queries):
         first_link = driver.find_element(By.XPATH, "(//h3/..)["+random.choice(['1','2','3',])+"]")
         try:
           first_link.click()
+          time.sleep(5) # Allow time for the page to load
         except:
-          driver.quit()
-        time.sleep(5)  # Allow time for the page to load
+          pass
     except KeyboardInterrupt:
       print("Recieved an interrupt! Shutting down...")
       try:
